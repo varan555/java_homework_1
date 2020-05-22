@@ -4,10 +4,8 @@ public class Chocolate extends Sweetness {
 
     private boolean peanut;
 
-    public Chocolate(boolean peanut) {
-        setName("Chocolate");
-        setPrice(2.57);
-        setWeight(2.51);
+    public Chocolate(boolean peanut, String name, double weight, double price) {
+        super(name, weight,  price);
         this.peanut = peanut;
     }
 

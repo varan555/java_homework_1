@@ -2,9 +2,15 @@ package sweet;
 
 public abstract class Sweetness {
 
-    private String name;
-    private double weight;
-    private double price;
+    protected String name;
+    protected double weight;
+    protected double price;
+
+    public Sweetness(String name, double weight, double price) {
+        this.name = name;
+        this.weight = weight;
+        this.price = price;
+    }
 
     public String getName() {
         return name;

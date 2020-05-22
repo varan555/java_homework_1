@@ -4,10 +4,8 @@ public class Marshmallows extends Sweetness {
 
     private boolean vanile;
 
-    public Marshmallows(boolean vanile) {
-        setName("Marshmallows");
-        setPrice(3.87);
-        setWeight(2.94);
+    public Marshmallows(boolean vanile, String name, double weight, double price) {
+        super(name, weight,  price);
         this.vanile = vanile;
     }
 

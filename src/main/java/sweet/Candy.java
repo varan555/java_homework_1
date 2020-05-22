@@ -3,10 +3,8 @@ package sweet;
 public class Candy extends Sweetness {
     private int quantity;
 
-    public Candy(int quality) {
-        setName("Candy");
-        setPrice(3.78);
-        setWeight(5.61);
+    public Candy(int quality, String name, double weight, double price) {
+        super(name, weight,  price);
         this.quantity = quality;
     }
 
