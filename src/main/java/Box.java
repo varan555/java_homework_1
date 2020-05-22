@@ -17,106 +17,108 @@ public class Box implements BoxAction {
         this.present = result;
     }
 
-
-    @Override
-    public void add(ArrayList<Sweetness> list, Sweetness sweet) {
-        list.add(sweet);
+    public Box() {
+        creatPresent();
     }
 
     @Override
-    public void deleteByID(ArrayList<Sweetness> list, int id) {
-        list.remove(id);
+    public void add(Sweetness sweet) {
+        present.add(sweet);
+    }
+
+
+    @Override
+    public void deleteByID(int id) {
+        present.remove(id);
     }
 
     @Override
-    public void deleteLast(ArrayList<Sweetness> list) {
-        list.remove(list.size() - 1);
+    public void deleteLast() {
+        present.remove(present.size() - 1);
     }
 
-    public void showAllSweet(ArrayList<Sweetness> list) {
-        for (Sweetness sw : list) {
+    public void showAllSweet() {
+        for (Sweetness sw : present) {
             System.out.println(sw.getName() + " весом: " + sw.getWeight() + "  стоимостью: " + sw.getPrice());
         }
     }
 
 
-    public ArrayList<Sweetness> getPresent() {
-        return present;
-    }
+//    private ArrayList<Sweetness> getPresent() {
+//        return present;
+//    }
 
-    public void setPresent(ArrayList<Sweetness> present) {
-        this.present = present;
-    }
+//    public void setPresent(ArrayList<Sweetness> present) {
+//        this.present = present;
+//    }
 
     @Override
-    public double showPrice(ArrayList<Sweetness> list) {
+    public double showPrice() {
         double result = 0;
-        for (Sweetness sw : list) {
+        for (Sweetness sw : present) {
             result = result + sw.getPrice();
         }
         return result;
     }
 
     @Override
-    public double showWeight(ArrayList<Sweetness> list) {
+    public double showWeight() {
         double result = 0.0;
-        for (Sweetness sw : list) {
+        for (Sweetness sw : present) {
             result = result + sw.getWeight();
         }
         return result;
     }
 
-    public void reduceWeight(double weight, Box box) {
-        Box boxSorted = new Box();
+    public void reduceWeight(double weight) {
         LinkedHashMap<Sweetness, Double> map = new LinkedHashMap<>();  //создаем мапу: ключ-сладость из box, значение - ее вес
-        for (Sweetness sw : box.getPresent()) {
+        for (Sweetness sw : present) {
             map.put(sw, sw.getWeight());
         }
         map.entrySet().stream()
                 .sorted(Map.Entry.<Sweetness, Double>comparingByValue()         //сортируем мапу по весу, переворачиваем её
                         .reversed())                                    // и копируем множество сладостей в поле объекта boxSorted
-                .forEach(x -> boxSorted.getPresent().add(x.getKey()));
+                .forEach(x -> present.add(x.getKey()));
 
 
-        for (Iterator<Sweetness> iterator = boxSorted.getPresent().iterator(); iterator.hasNext(); ) {
+        for (Iterator<Sweetness> iterator =present.iterator(); iterator.hasNext(); ) {
             Sweetness value = iterator.next();                           // я хз как по другому сделать
-            if (boxSorted.showWeight(boxSorted.getPresent())>weight) {
+            if (showWeight()>weight) {
                 iterator.remove();
             }
         }
 
-        showAllSweet(boxSorted.getPresent());
+        showAllSweet();
         System.out.println("Осортированный по весу");
         System.out.println("-----------------------------------");
-        System.out.println("Общий вес подарка:  " + showWeight(boxSorted.getPresent()));
+        System.out.println("Общий вес подарка:  " + showWeight());
         System.out.println("-----------------------------------");
-        showWeight(boxSorted.getPresent());
+        showWeight();
     }
 
-    public void reducePrice(double price, Box box) {  // я хз как по другому сделать
-        Box boxSorted = new Box();
+    public void reducePrice(double price) {  // я хз как по другому сделать
         LinkedHashMap<Sweetness, Double> map = new LinkedHashMap<>();  //создаем мапу: ключ-сладость из box, значение - ее вес
-        for (Sweetness sw : box.getPresent()) {
+        for (Sweetness sw : present) {
             map.put(sw, sw.getPrice());
         }
         map.entrySet().stream()
                 .sorted(Map.Entry.<Sweetness, Double>comparingByValue()         //сортируем мапу по весу, переворачиваем её
                         .reversed())                                    // и копируем множество сладостей в поле объекта boxSorted
-                .forEach(x -> boxSorted.getPresent().add(x.getKey()));
+                .forEach(x ->present.add(x.getKey()));
 
 
-        for (Iterator<Sweetness> iterator = boxSorted.getPresent().iterator(); iterator.hasNext(); ) {
+        for (Iterator<Sweetness> iterator = present.iterator(); iterator.hasNext(); ) {
             Sweetness value = iterator.next();
-            if (boxSorted.showPrice(boxSorted.getPresent())>price) {
+            if (showPrice()>price) {
                 iterator.remove();
             }
         }
 
-        showAllSweet(boxSorted.getPresent());
+        showAllSweet();
         System.out.println("Осортированный по цене");
         System.out.println("-----------------------------------");
-        System.out.println("Общая стоимость подарка:  " + showPrice(boxSorted.getPresent()));
+        System.out.println("Общая стоимость подарка:  " + showPrice());
         System.out.println("-----------------------------------");
-        showWeight(boxSorted.getPresent());
+        showWeight();
     }
 }
