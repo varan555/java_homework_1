@@ -89,7 +89,7 @@ public class Box implements BoxAction {
         }
 
         showAllSweet();
-        System.out.println("Осортированный по весу");
+        System.out.println("Осортированный по весу.");
         System.out.println("-----------------------------------");
         System.out.println("Общий вес подарка:  " + showWeight());
         System.out.println("-----------------------------------");
